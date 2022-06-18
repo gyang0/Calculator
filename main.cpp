@@ -5,37 +5,60 @@ using namespace std;
 int main()
 {
     int choice;
-    int num;
     
-    cout << "Pick one:\n";
-    cout << "1. Evaluate expression\n";
-    cout << "2. Solve quadratic formula\n";
-    cout << "3. Get number info\n";
+    // Input to be used later
+    double a, b, c,
+           num;
     
-    cin >> choice;
+    // Back to menu or quit (Y/N)
+    char again;
     
-    switch(choice)
-    {
-        case 1:
-            
-        break;
+    do {
+        cout << "Pick one:\n";
+        cout << "1. Pythagorean theorem\n";
+        cout << "2. Solve quadratic formula\n";
+        cout << "3. Get number info\n";
         
-        case 2:
-            
-        break;
         
-        case 3:
-            cout << "Enter a number: ";
-            cin >> num;
-            getNumInfo(num);
-            
-        break;
-        
-        default:
+        // Input
+        cin >> choice;
+        while(!(choice >= 1 && choice <= 3))
+        {
             cout << "Try again: ";
             cin >> choice;
-    }
-    
+        }
+        
+        
+        // Depending on choice
+        switch(choice)
+        {
+            case 1: // Pythagorean theorem
+                cout << "Enter the two legs of a triangle (a and b): ";
+                    cin >> a >> b;
+                cout << "The length of the hypotenuse is " << pythag(a, b) << "\n";
+            break;
+            
+            case 2: // Quadratic formula
+                cout << "Enter three numbers a, b, and c where ax^2 + bx + c = 0.\n";
+                cout << "Separate each number by a space: ";
+                cin >> a >> b >> c;
+                solveQuad(a, b, c);
+            break;
+            
+            case 3: // Get number info
+                cout << "Enter a number: ";
+                cin >> num;
+                getNumInfo(num);
+            break;
+            
+        }
+        
+        
+        cout << "\nBack to menu? (Y/N)\n";
+        cin >> again;
+        cout << "\n\n";
+        
+    } while(again == 'Y' || again == 'y');
     
     return 0;
 }
