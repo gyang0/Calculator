@@ -1,25 +1,32 @@
-#include "myFuncs.h"
 #include <iostream>
 #include <cmath>
-using namespace std;
+#include "myFuncs.h"
 
-double evalExpression(string str)
+double pythag(double a, double b)
 {
-    // 1. Parentheses
-    
-    // 2. Evaluate square roots, powers, and trig
-    
-    // 2. Multiplication and division
-    
-    // 3. Addition and subtraction
-    
-    return 0.0;
+    return sqrt(pow(a, 2) + pow(b, 2));
 }
 
 
-double solveQuad()
+void solveQuad(double a, double b, double c)
 {
-    return 0.0;
+    double determinant = pow(b, 2) - (4*a*c),
+           solution1,
+           solution2;
+    
+    
+    if(determinant < 0)
+        std::cout << "There are no solutions.\n";
+    else
+    {
+        solution1 = (-b + sqrt(determinant))/(2*a);
+        solution2 = (-b - sqrt(determinant))/(2*a);
+        
+        if(determinant > 0)
+            std::cout << "There are two solutions: " << solution1 << " and " << solution2 << "\n";
+        else
+            std::cout << "There is one solution: " << solution1 << "\n";
+    }
 }
 
 
@@ -33,14 +40,14 @@ void getNumInfo(double num)
     
     if(num - (int)num == 0)
     {
-        if(num > 0) cout << num << " is a positive integer.\n";
-        else if(num < 0) cout << num << " is a negative integer.\n";
-        else cout << "Input is zero.";
+        if(num > 0) std::cout << num << " is a positive integer.\n";
+        else if(num < 0) std::cout << num << " is a negative integer.\n";
+        else std::cout << "Input is zero.";
         
         isInt = true;
     }
     else
-        cout << num << "is an decimal.\n";
+        std::cout << num << " is a decimal.\n";
     
     
     if(isInt)
@@ -58,18 +65,18 @@ void getNumInfo(double num)
             }
         }
         if(isPrime)
-            cout << intVal << " is a prime.\n";
+            std::cout << intVal << " is a prime.\n";
         else
-            cout << intVal << " is not a prime.\n";
+            std::cout << intVal << " is not a prime.\n";
         
         
         
         // Give factors
-        cout << "Factors: 1";
+        std::cout << "Factors: 1";
         for(int i = 2; i <= intVal; i++)
         {
             if(intVal % i == 0)
-                cout << ", " << i;
+                std::cout << ", " << i;
         }
     }
     
