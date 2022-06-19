@@ -87,11 +87,6 @@ void getNumInfo(double num)
 
 void evalExpression(std::string str)
 {
-    // An array of str.length() * 2 - 1 elements
-    // Every odd position contains the number and every even position contains the operator (+, -, (), /, *)
-    // 1. Remove spaces
-    // 2. Evaluate multiplication/division
-    // 3.Evaluate addition/subtraction
     std::string result;
     for(int i = 0; i < str.length(); i++)
         if(str[i] != ' ') result += str[i];
