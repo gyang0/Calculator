@@ -97,7 +97,7 @@ void evalExpression(std::string str)
         if(str[i] != ' ') result += str[i];
     
     
-    int arr[result.length()];
+    int arr[(result.length())];
     
     for(int i = 0; i < result.length(); i++)
     {
@@ -105,33 +105,41 @@ void evalExpression(std::string str)
             arr[i] = (int)result[i] - 48;
         else
         {
-            if(result[i] == '(') arr[i] = -1;
-            else if(result[i] == ')') arr[i] = -2;
-            else if(result[i] == '+') arr[i] = -3;
-            else if(result[i] == '-') arr[i] = -4;
-            else if(result[i] == '*') arr[i] = -5;
-            else if(result[i] == '/') arr[i] = -6;
+            if(result[i] == '+') arr[i] = -1;
+            else if(result[i] == '-') arr[i] = -2;
+            else if(result[i] == '*') arr[i] = -3;
+            else if(result[i] == '/') arr[i] = -4;
         }
     }
     
     
-    /*
-        Go through the result array
-        If a number is found:
-            Keep track of the first position
-            Keep count
-            Keep adding the previous numbers to the currect numbers
-            Keep replacing the previous number positions with spaces
-            Subtract 48 * count from the final.
-        If a space is found:
-            continue
-        Else
-            Leave it as it is
-    */
+    
+    int count = 1,
+        posCount = -100; // Position to replace with a -100 later
+    
+    // Go through arr backwards
+    for(int i = result.length() - 1; i >= 0; i--)
+    {
+        // If more than 1 position is a number
+        if(arr[i] >= 0 && arr[i - 1] >= 0)
+        {
+            // Update numbers
+            arr[i - 1] *= pow(10, count);
+            arr[i - 1] += arr[i];
+            
+            // Replace the previous pos with a -100 (meaning to skip that pos)
+            posCount >= 0 ? arr[posCount] = -100 : posCount = posCount;
+            
+            posCount = i;
+            count++;
+        
+        } else
+            count = 1;
+    }
+    
     
     
     for(int i = 0; i < result.length(); i++)
-    {
         std::cout << arr[i] << " ";
-    }
+    
 }
