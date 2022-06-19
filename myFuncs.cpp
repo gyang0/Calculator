@@ -79,5 +79,56 @@ void getNumInfo(double num)
                 std::cout << ", " << i;
         }
     }
+}
+
+
+void evalExpression(std::string str)
+{
+    // An array of str.length() * 2 - 1 elements
+    // Every odd position contains the number and every even position contains the operator (+, -, (), /, *)
+    // 1. Remove spaces
+    // 2. Evaluate multiplication/division
+    // 3.Evaluate addition/subtraction
+    std::string result;
+    for(int i = 0; i < str.length(); i++)
+        if(str[i] != ' ') result += str[i];
     
+    
+    int arr[result.length()];
+    
+    for(int i = 0; i < result.length(); i++)
+    {
+        if(isdigit(result[i]))
+            arr[i] = (int)result[i] - 48;
+        else
+        {
+            if(result[i] == '(') arr[i] = -1;
+            else if(result[i] == ')') arr[i] = -2;
+            else if(result[i] == '+') arr[i] = -3;
+            else if(result[i] == '-') arr[i] = -4;
+            else if(result[i] == '*') arr[i] = -5;
+            else if(result[i] == '/') arr[i] = -6;
+        }
+    }
+    
+    
+    /*
+        Go through the result array
+        If a number is found:
+            Keep track of the first position
+            Keep count
+            Keep adding the previous numbers to the currect numbers
+            Keep replacing the previous number positions with spaces
+            Subtract 48 * count from the final.
+        If a space is found:
+            continue
+        Else
+            Leave it as it is
+    */
+    
+    
+    for(int i = 0; i < result.length(); i++)
+    {
+        std::cout << arr[i] << " ";
+    }
 }
