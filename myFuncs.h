@@ -15,4 +15,10 @@ void getNumInfo(double num);
 // If the number is prime
 // Factors of the number
 
+
+void evalExpression(std::string str);
+// Evaluates a basic expression involving +, -, *, /, and ().
+// Doesn't work for decimals.
+
+
 #endif
