@@ -9,6 +9,7 @@ int main()
     // Input to be used later
     double a, b, c,
            num;
+    string str;
     
     // Back to menu or quit (Y/N)
     char again;
@@ -18,11 +19,12 @@ int main()
         cout << "1. Pythagorean theorem\n";
         cout << "2. Solve quadratic formula\n";
         cout << "3. Get number info\n";
+        cout << "4. Evaluate expression\n";
         
         
         // Input
         cin >> choice;
-        while(!(choice >= 1 && choice <= 3))
+        while(!(choice >= 1 && choice <= 4))
         {
             cout << "Try again: ";
             cin >> choice;
@@ -51,6 +53,12 @@ int main()
                 getNumInfo(num);
             break;
             
+            case 4: // Get number info
+                cout << "Enter an expression: ";
+                cin.ignore();
+                getline(cin, str);
+                evalExpression(str);
+            break;
         }
         
         
