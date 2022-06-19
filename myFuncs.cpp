@@ -64,20 +64,23 @@ void getNumInfo(double num)
                 break;
             }
         }
-        if(isPrime)
+        if(num > 1 && isPrime)
             std::cout << intVal << " is a prime.\n";
         else
             std::cout << intVal << " is not a prime.\n";
         
         
-        
         // Give factors
-        std::cout << "Factors: 1";
-        for(int i = 2; i <= intVal; i++)
+        if(num > 0)
         {
-            if(intVal % i == 0)
-                std::cout << ", " << i;
+            std::cout << "Factors: 1";
+            for(int i = 2; i <= intVal; i++)
+            {
+                if(intVal % i == 0)
+                    std::cout << ", " << i;
+            }
         }
+        
     }
 }
 
