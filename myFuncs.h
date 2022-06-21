@@ -16,6 +16,11 @@ void getNumInfo(double num);
 // Factors of the number
 
 
+void findResult(std::string what, double arr[], int size, int &i);
+// Used for evalExpression function
+// Finds the result of doing one of the four operators on two items in an array.
+
+
 void evalExpression(std::string str);
 // Evaluates a basic expression involving +, -, *, /, and ().
 // Doesn't work for decimals.
