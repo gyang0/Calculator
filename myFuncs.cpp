@@ -2,12 +2,15 @@
 #include <cmath>
 #include "myFuncs.h"
 
+
+// Pythagorean theorem
 double pythag(double a, double b)
 {
     return sqrt(pow(a, 2) + pow(b, 2));
 }
 
 
+// Quadratic equation solver
 void solveQuad(double a, double b, double c)
 {
     double determinant = pow(b, 2) - (4*a*c),
@@ -30,12 +33,9 @@ void solveQuad(double a, double b, double c)
 }
 
 
+// Give some info about the input number
 void getNumInfo(double num)
 {
-    // If the number is prime
-    // Factors of the number
-    // Number in binary
-    // Number in hexadecimal
     bool isInt = false;
     
     if(num - (int)num == 0)
@@ -85,6 +85,33 @@ void getNumInfo(double num)
 }
 
 
+// Finds the result of doing one of the four operators on an array
+void findResult(std::string what, double arr[], int size, int &i)
+{
+    int before, after;
+    
+    // Find the next number
+    after = i + 1;
+    while(arr[after] < 0 && after < size) after++;
+    
+    // Find the previous number
+    before = i - 1;
+    while(arr[before] < 0 && before >= 0) before--;
+    
+    if(what == "multiplication") arr[before] = arr[before] * arr[after];
+    else if(what == "division") arr[before] = arr[before] / arr[after];
+    else if(what == "addition") arr[before] = arr[before] + arr[after];
+    else arr[before] = arr[before] - arr[after];
+    
+    // Reset
+    arr[i] = -100;
+    arr[after] = -100;
+    
+    i = 0;
+}
+
+
+// Evaluates a string
 void evalExpression(std::string str)
 {
     std::string result;
@@ -92,7 +119,7 @@ void evalExpression(std::string str)
         if(str[i] != ' ') result += str[i];
     
     
-    int arr[(result.length())];
+    double arr[(result.length())];
     
     for(int i = 0; i < result.length(); i++)
     {
@@ -104,6 +131,7 @@ void evalExpression(std::string str)
             else if(result[i] == '-') arr[i] = -2;
             else if(result[i] == '*') arr[i] = -3;
             else if(result[i] == '/') arr[i] = -4;
+            else arr[i] = -100;
         }
     }
     
@@ -134,7 +162,41 @@ void evalExpression(std::string str)
     
     
     
+    // Number before and after the operator sign
+    int after = 0, before = 0;
+    
+    // Go through and multiply/divide numbers
     for(int i = 0; i < result.length(); i++)
-        std::cout << arr[i] << " ";
+    {
+        // Multiplication
+        if(arr[i] == -3)
+            findResult("multiplication", arr, result.length(), i);
+        
+        // Division
+        else if(arr[i] == -4)
+            findResult("division", arr, result.length(), i);
+    }
+        
+    
+    // Go through and add/subtract numbers
+    for(int i = 0; i < result.length(); i++)
+    {
+        // Addition
+        if(arr[i] == -1)
+            findResult("addition", arr, result.length(), i);
+        
+        // Subtraction
+        else if(arr[i] == -2)
+            findResult("subtraction", arr, result.length(), i);
+    }
+    
+    
+    // Give the result
+    for(int i = 0; i < result.length(); i++)
+        if(arr[i] != -100)
+        {
+            std::cout << arr[i];
+            break;
+        }
     
 }
